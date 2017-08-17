@@ -71,11 +71,9 @@ var paginator = function() {
 
     function getLastChildren(start) {
       var nodes;
-      if (typeof start.childNodes !== "undefined") {
-        nodes = start.childNodes;
-        var len = nodes.length - 1;
-        var node = nodes[len];
-        if (start.childNodes.length != 0) {
+      if (start.lastElementChild != null && typeof start.childNodes !== "undefined") {
+        var node = start.lastElementChild;
+        if (node != null) {
           var lastNode = getLastChildren(node);
           start = lastNode;
         }
@@ -87,7 +85,7 @@ var paginator = function() {
       if (lastPage != 0) {
         return;
       }
-      var lastElement = getLastChildren($('#pages_5NPJADvYjZY')[0]);
+      var lastElement = getLastChildren($('#pages_5NPJADvYjZY')[0].lastElementChild);
       var lastViewLeft = function(el) {
         //special bonus for those using jQuery
         if (el instanceof jQuery) {
@@ -104,6 +102,9 @@ var paginator = function() {
         return rect.left;
       }(lastElement);
       lastPage = Math.ceil(lastViewLeft / (pagerWidth + pagerGap));
+      if (lastPage == 1) {
+        lastPage = 200;
+      }
       // console.log("lastPage:", lastPage, "lastViewLeft:", lastViewLeft, "pageWidth+Gap:", (pagerWidth + pagerGap));
     }
 
@@ -256,8 +257,6 @@ loadScript("https://cdn.rawgit.com/blisszard/readability/development/Readability
     jQuery(function($) {
       document.body.innerHTML = '<div id="readability_article" style="display:none;">' + article.content + '</div>';
       var content = $('#readability-page-1').html();
-      console.log(article.content);
-
       document.body.innerHTML = '<div id="pager_container" style=""><div id="pages_5NPJADvYjZY" style="right: 0px; ">' + content + '</div></div>';
       $('.readability-styled').attr('style', '');
       initStyle();

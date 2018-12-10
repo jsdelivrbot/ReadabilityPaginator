@@ -216,7 +216,7 @@ function initStyle() {
   jQuery(
     function($) {
       $('head').append('<link rel="stylesheet" href="https://use.fontawesome.com/releases/v4.6.3/css/font-awesome-css.min.css" media="all">');
-      $('head').append('<link href="https://rawgit.com/blisszard/readability/development/pager.css" rel="stylesheet">');
+      $('head').append('<link href="https://cdn.jsdelivr.net/gh/blisszard/readability@development/pager.css" rel="stylesheet">');
       $('head').append('<link href="https://gitcdn.link/repo/blisszard/readability/development/font_style.css" rel="stylesheet">');
     });
 }
@@ -241,7 +241,7 @@ function loadScript(url, callback) {
   document.getElementsByTagName("head")[0].appendChild(script);
 }
 
-loadScript("https://cdn.rawgit.com/blisszard/readability/development/Readability.min.js", function() {
+loadScript("https://cdn.jsdelivr.net/gh/blisszard/readability@development/Readability.min.js", function() {
   var loc = document.location;
   var uri = {
     spec: loc.href,
